@@ -2,6 +2,9 @@
 
 **A Realtime Digital Signal Processing (DSP) Library for Arduino.**
 
+# NOTE: THIS IS NOT MY CODE
+## The original library was developed by [JonHub](https://github.com/JonHub/Filters), but never added to the Arduino Library Manager. The Libraries Manager now hosts the code via this repo.
+
 The Filters library implements several useful digital filters for real-time signal processing in microcontrollers.  These filters are easy-to-use, programmable versions of common analog signal processing filters, such as single-pole (RC) lowpass and highpass filters.  The library also includes two-pole lowpass filters (Bessel and Butterworth), as well other "filters" to calculate running statistics, or return the time derivative of a signal.
 
 A common usage of the Filters library is to use a lowpass filter (or cascaded set of lowpass filters) to smooth out values read continuously from an analog input pin.  The filter output values can be read as needed, and are always valid.  This is a simple way to implement the standard oversample, filter, downsample patten common with in analog-to-digital conversion (ADC).

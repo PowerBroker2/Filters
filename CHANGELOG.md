@@ -3,6 +3,14 @@
 
 All notable changes to this project will be documented in this file.  The format is based on [Keep a Changelog](http://keepachangelog.com/), and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.2.0] - 2024-08-21
+
+Ported to P_B account for the lib to be hosted by the Arduino libraries manager.  
+
+### Changed
+- `library.properties` with updated URL, version, etc.
+- `README.md` with disclaimer
+
 ## <unreleased> [0.1.1] - 2021-05-05
 
 Updated to comply with the Arduio 1.5 standard directory structure.  [Library Manager FAQ · arduino_Arduino Wiki](https://github.com/arduino/Arduino/wiki/Library-Manager-FAQ).
