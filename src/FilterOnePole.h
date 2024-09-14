@@ -31,16 +31,16 @@ struct FilterOnePole {
   float ElapsedUS;   // time since last update
   long LastUS;       // last time measured
 
-  FilterOnePole( FILTER_TYPE ft=LOWPASS, float fc=1.0, float initialValue=0 );
+  FilterOnePole( FILTER_TYPE ft=LOWPASS, float fc=1.0, float initialValue=0, long initialUs=-1 );
   
   // sets or resets the parameters and state of the filter
-  void setFilter( FILTER_TYPE ft, float tauS, float initialValue );
+  void setFilter( FILTER_TYPE ft, float tauS, float initialValue, long initialUs=-1 );
 
   void setFrequency( float newFrequency );
   
   void setTau( float newTau );
 
-  float input( float inVal );
+  float input( float inVal, long us=-1 );
 
   float output();
 

@@ -1,8 +1,14 @@
 #include "FilterDerivative.h"
 #include "Arduino.h"
 
-float FilterDerivative::input( float inVal ) {
+float FilterDerivative::input( float inVal, long us ) {
   long thisUS = micros();
+  
+  if ((us < 0) || (us < LastUS))
+    thisUS = micros(); // get current time
+  else
+    thisUS = us;
+
   float dt = 1e-6*float(thisUS - LastUS);   // cast to float here, for math
   LastUS = thisUS;                          // update this now
   

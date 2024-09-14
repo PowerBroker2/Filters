@@ -43,7 +43,7 @@ struct FilterTwoPole {
 
   long LastTimeUS;  // last time measured
 
-  FilterTwoPole( float frequency0 = 1, float qualityFactor = 1, float xInit = 0);
+  FilterTwoPole( float frequency0 = 1, float qualityFactor = 1, float xInit = 0, long initialUs=-1 );
 
   void setQ( float qualityFactor );
 
@@ -51,7 +51,7 @@ struct FilterTwoPole {
 
   void setAsFilter( OSCILLATOR_TYPE ft, float frequency3db, float initialValue=0 );
 
-  float input( float drive = 0 );
+  float input( float drive = 0, long us=-1 );
 
   float output();
   

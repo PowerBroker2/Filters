@@ -61,15 +61,18 @@
 // (note – ramp time for a Bessel filter is about 1/(2F_0 ) )
 
 
-FilterTwoPole::FilterTwoPole( float frequency0, float qualityFactor, float xInit ) {
+FilterTwoPole::FilterTwoPole( float frequency0, float qualityFactor, float xInit, long initialUs ) {
   X = xInit;              // start it some arbitrary position
   Vprev = 0;              // initially stopped
   IsHighpass = false;     // by default, a normal oscillator
 
   setQ( qualityFactor );
   setFrequency0( frequency0 );
-
-  LastTimeUS = micros();
+  
+  if (initialUs > 0)
+    LastTimeUS = micros();
+  else
+    LastTimeUS = initialUs;
 }
 
 void FilterTwoPole::setQ( float qualityFactor ) {
@@ -117,10 +120,16 @@ void FilterTwoPole::setAsFilter( OSCILLATOR_TYPE ft, float frequency3db, float i
   
 }
 
-float FilterTwoPole::input( float drive ) {
+float FilterTwoPole::input( float drive, long us ) {
   Fprev = drive;                      // needed when using filter as a highpass
 
-  long now = micros();                      // get current time
+  long now;
+  
+  if ((us < 0) || (us < LastTimeUS))
+    now = micros(); // get current time
+  else
+    now = us;
+
   float dt = 1e-6*float(now - LastTimeUS);  // find dt
   LastTimeUS = now;                         // save the last time
   

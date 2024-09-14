@@ -8,7 +8,7 @@ struct FilterDerivative {
   
   float Derivative;
   
-  float input( float inVal );
+  float input( float inVal, long us=-1 );
   
   float output();
 };

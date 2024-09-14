@@ -1,11 +1,11 @@
 #include "FilterOnePole.h"
 #include "FloatDefine.h"
 
-FilterOnePole::FilterOnePole( FILTER_TYPE ft, float fc, float initialValue ) {
-  setFilter( ft, fc, initialValue );
+FilterOnePole::FilterOnePole( FILTER_TYPE ft, float fc, float initialValue, long initialUs ) {
+  setFilter( ft, fc, initialValue, initialUs );
 }
 
-void FilterOnePole::setFilter( FILTER_TYPE ft, float fc, float initialValue ) {
+void FilterOnePole::setFilter( FILTER_TYPE ft, float fc, float initialValue, long initialUs ) {
   FT = ft;
   setFrequency( fc );
 
@@ -13,11 +13,20 @@ void FilterOnePole::setFilter( FILTER_TYPE ft, float fc, float initialValue ) {
   Ylast = initialValue;
   X = initialValue;
 
-  LastUS = micros();
+  if (initialUs > 0)
+    LastUS = micros();
+  else
+    LastUS = initialUs;
 }
 
-float FilterOnePole::input( float inVal ) {
-  long time = micros();
+float FilterOnePole::input( float inVal, long us ) {
+  long time;
+  
+  if ((us < 0) || (us < LastUS))
+    time = micros(); // get current time
+  else
+    time = us;
+
   ElapsedUS = float(time - LastUS);   // cast to float here, for math
   LastUS = time;                      // update this now
 
@@ -204,7 +213,7 @@ void FilterOnePoleCascade::test() {
   float maxVal = 0;
   float valWasOutputThisCycle = true;
   
-  float lastFilterVal = 0;
+  // float lastFilterVal = 0;
   
   while( true ) {
     float now = 1e-3*millis();
